@@ -57,3 +57,100 @@ a { color: inherit; text-decoration: none; }
     color: var(--ff-text-muted);
     font-size: 0.85rem;
 }
+
+.ff-hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.ff-hero-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    transition: opacity 0.2s ease-out;
+}
+
+.ff-hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    padding: 0 5%;
+}
+
+.ff-hero-text h1 {
+    font-size: 2.75rem;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+}
+
+.ff-hero-text p {
+    color: var(--ff-text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.ff-btn-primary {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    background: var(--ff-cyan);
+    color: var(--ff-navy);
+    font-weight: 600;
+    border-radius: 6px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ff-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 217, 255, 0.35);
+}
+
+.ff-services-teaser {
+    padding: 6rem 5%;
+}
+
+.ff-services-teaser h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.ff-tilt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.ff-tilt-card {
+    background: var(--ff-indigo);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    will-change: transform;
+}
+
+.ff-tilt-card:hover {
+    box-shadow: 0 12px 30px rgba(124, 92, 255, 0.25);
+}
+
+.ff-tilt-card h3 {
+    color: var(--ff-cyan);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.ff-tilt-card p {
+    color: var(--ff-text-muted);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+    .ff-hero-text h1 { font-size: 2rem; }
+}

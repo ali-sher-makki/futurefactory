@@ -1,8 +1,33 @@
-<!-- core/templates/core/home.html -->
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<section style="padding: 8rem 5%; text-align:center;">
-    <h1 style="font-size:3rem;">Future Factory is coming to life.</h1>
-    <p style="color:var(--ff-text-muted); margin-top:1rem;">The 3D hero section lands in Phase 2.</p>
+<section class="ff-hero">
+    <div id="hero-canvas-container" class="ff-hero-canvas"></div>
+    <div class="ff-hero-text">
+        <h1>We build the growth engine<br>behind your business.</h1>
+        <p>Lead generation, outreach, automation and web development — run by a team that operates like an extension of yours.</p>
+        <a href="{% url 'core:contact' %}" class="ff-btn-primary">Get a free quote</a>
+    </div>
 </section>
+
+<section class="ff-services-teaser">
+    <h2>What we do</h2>
+    <div class="ff-tilt-grid">
+        <div class="ff-tilt-card"><h3>Lead generation</h3><p>Qualified prospects, delivered consistently.</p></div>
+        <div class="ff-tilt-card"><h3>LinkedIn outreach</h3><p>Connect with decision-makers at scale.</p></div>
+        <div class="ff-tilt-card"><h3>Cold calling</h3><p>Trained callers booking real conversations.</p></div>
+        <div class="ff-tilt-card"><h3>Appointment setting</h3><p>Your calendar, filled with warm meetings.</p></div>
+        <div class="ff-tilt-card"><h3>Data scraping &amp; entry</h3><p>Clean, structured data, on demand.</p></div>
+        <div class="ff-tilt-card"><h3>Email &amp; social marketing</h3><p>Campaigns that convert, not just send.</p></div>
+        <div class="ff-tilt-card"><h3>Meta ads</h3><p>Paid campaigns managed for ROI.</p></div>
+        <div class="ff-tilt-card"><h3>Web &amp; WordPress development</h3><p>Fast, modern sites built to perform.</p></div>
+        <div class="ff-tilt-card"><h3>AI automation</h3><p>Workflows that run themselves.</p></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="{% static 'js/hero.js' %}"></script>
+<script src="{% static 'js/tilt-cards.js' %}"></script>
 {% endblock %}
