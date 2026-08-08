@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Our Services - Future Factory{% endblock %}
+{% block content %}
+<section class="ff-page-header">
+    <h1>Our Services</h1>
+    <p>Everything you need to generate leads, close deals, and scale operations.</p>
+</section>
+<section class="ff-services-teaser">
+    <div class="ff-tilt-grid">
+        {% for service in services %}
+        <a href="{{ service.get_absolute_url }}" class="ff-tilt-card">
+            {% if service.icon %}<span class="ff-card-icon">{{ service.icon }}</span>{% endif %}
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.short_description }}</p>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'js/tilt-cards.js' %}"></script>
+{% endblock %}

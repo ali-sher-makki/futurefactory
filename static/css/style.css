@@ -36,11 +36,7 @@ a { color: inherit; text-decoration: none; }
     z-index: 100;
 }
 
-.ff-logo {
-    font-weight: 700;
-    font-size: 1.4rem;
-}
-
+.ff-logo { font-weight: 700; font-size: 1.4rem; }
 .ff-logo span { color: var(--ff-cyan); }
 
 .ff-navbar nav a {
@@ -82,17 +78,8 @@ a { color: inherit; text-decoration: none; }
     padding: 0 5%;
 }
 
-.ff-hero-text h1 {
-    font-size: 2.75rem;
-    line-height: 1.2;
-    margin-bottom: 1.25rem;
-}
-
-.ff-hero-text p {
-    color: var(--ff-text-muted);
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-}
+.ff-hero-text h1 { font-size: 2.75rem; line-height: 1.2; margin-bottom: 1.25rem; }
+.ff-hero-text p { color: var(--ff-text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
 
 .ff-btn-primary {
     display: inline-block;
@@ -109,15 +96,20 @@ a { color: inherit; text-decoration: none; }
     box-shadow: 0 8px 24px rgba(0, 217, 255, 0.35);
 }
 
-.ff-services-teaser {
-    padding: 6rem 5%;
+.ff-btn-secondary {
+    display: inline-block;
+    padding: 0.8rem 1.75rem;
+    border: 1px solid var(--ff-cyan);
+    color: var(--ff-cyan);
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
 }
 
-.ff-services-teaser h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 3rem;
-}
+.ff-btn-secondary:hover { background: var(--ff-cyan); color: var(--ff-navy); }
+
+.ff-services-teaser { padding: 6rem 5%; }
+.ff-services-teaser h2 { text-align: center; font-size: 2rem; margin-bottom: 3rem; }
 
 .ff-tilt-grid {
     display: grid;
@@ -128,6 +120,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .ff-tilt-card {
+    display: block;
     background: var(--ff-indigo);
     border: 1px solid rgba(0, 217, 255, 0.15);
     border-radius: 12px;
@@ -136,20 +129,28 @@ a { color: inherit; text-decoration: none; }
     will-change: transform;
 }
 
-.ff-tilt-card:hover {
-    box-shadow: 0 12px 30px rgba(124, 92, 255, 0.25);
-}
+.ff-tilt-card:hover { box-shadow: 0 12px 30px rgba(124, 92, 255, 0.25); }
+.ff-tilt-card h3 { color: var(--ff-cyan); margin-bottom: 0.5rem; font-size: 1.1rem; }
+.ff-tilt-card p { color: var(--ff-text-muted); font-size: 0.9rem; }
 
-.ff-tilt-card h3 {
-    color: var(--ff-cyan);
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
+.ff-card-icon { font-size: 1.75rem; display: block; margin-bottom: 0.75rem; }
+.ff-card-icon-lg { font-size: 3rem; display: block; margin-bottom: 1rem; }
 
-.ff-tilt-card p {
-    color: var(--ff-text-muted);
-    font-size: 0.9rem;
-}
+.ff-view-all { text-align: center; margin-top: 3rem; }
+
+.ff-page-header { padding: 5rem 5% 2rem; text-align: center; }
+.ff-page-header h1 { font-size: 2.25rem; margin-bottom: 0.75rem; }
+.ff-page-header p { color: var(--ff-text-muted); }
+
+.ff-service-detail { padding: 6rem 5%; display: flex; justify-content: center; }
+.ff-service-detail-inner { max-width: 720px; text-align: center; }
+.ff-service-detail-inner h1 { font-size: 2.25rem; margin-bottom: 1rem; }
+.ff-service-lead { color: var(--ff-cyan); font-size: 1.1rem; margin-bottom: 2rem; }
+.ff-service-body { color: var(--ff-text-muted); text-align: left; margin-bottom: 2rem; }
+
+.ff-service-features { list-style: none; text-align: left; margin-bottom: 2.5rem; }
+.ff-service-features li { padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.ff-service-features li::before { content: "→ "; color: var(--ff-cyan); }
 
 @media (max-width: 640px) {
     .ff-hero-text h1 { font-size: 2rem; }

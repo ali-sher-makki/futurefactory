@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ service.name }} - Future Factory{% endblock %}
+{% block content %}
+<section class="ff-service-detail">
+    <div class="ff-service-detail-inner">
+        {% if service.icon %}<span class="ff-card-icon-lg">{{ service.icon }}</span>{% endif %}
+        <h1>{{ service.name }}</h1>
+        <p class="ff-service-lead">{{ service.short_description }}</p>
+        <div class="ff-service-body">
+            <p>{{ service.detail_description|linebreaksbr }}</p>
+        </div>
+        {% if service.feature_list %}
+        <ul class="ff-service-features">
+            {% for feature in service.feature_list %}
+            <li>{{ feature }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <a href="{% url 'core:contact' %}" class="ff-btn-primary">Get a free quote</a>
+    </div>
+</section>
+{% endblock %}
