@@ -1,4 +1,18 @@
-<div class="ff-tilt-grid">
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="ff-hero">
+    <div id="hero-canvas-container" class="ff-hero-canvas"></div>
+    <div class="ff-hero-text">
+        <h1>We build the growth engine<br>behind your business.</h1>
+        <p>Lead generation, outreach, automation and web development — run by a team that operates like an extension of yours.</p>
+        <a href="{% url 'core:contact' %}" class="ff-btn-primary">Get a free quote</a>
+    </div>
+</section>
+
+<section class="ff-services-teaser">
+    <h2>What we do</h2>
+   <div class="ff-tilt-grid">
     {% for service in services %}
     <a href="{{ service.get_absolute_url }}" class="ff-tilt-card">
         {% if service.icon %}<span class="ff-card-icon">{{ service.icon }}</span>{% endif %}
@@ -10,3 +24,11 @@
 <div class="ff-view-all">
     <a href="{% url 'services:list' %}" class="ff-btn-secondary">View all services</a>
 </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="{% static 'js/hero.js' %}"></script>
+<script src="{% static 'js/tilt-cards.js' %}"></script>
+{% endblock %}
