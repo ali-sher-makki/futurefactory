@@ -155,3 +155,70 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 640px) {
     .ff-hero-text h1 { font-size: 2rem; }
 }
+.ff-contact {
+    padding: 2rem 5% 6rem;
+    display: flex;
+    justify-content: center;
+}
+
+.ff-lead-form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.ff-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.ff-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.ff-form-group label {
+    font-size: 0.85rem;
+    color: var(--ff-text-muted);
+}
+
+.ff-form-group input,
+.ff-form-group select,
+.ff-form-group textarea {
+    background: var(--ff-navy-light);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 6px;
+    padding: 0.75rem;
+    color: var(--ff-text);
+    font-family: var(--ff-font-body);
+    font-size: 0.95rem;
+}
+
+.ff-form-group input:focus,
+.ff-form-group select:focus,
+.ff-form-group textarea:focus {
+    outline: none;
+    border-color: var(--ff-cyan);
+}
+
+.ff-lead-form button {
+    align-self: flex-start;
+    border: none;
+    cursor: pointer;
+}
+
+.ff-form-status {
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+}
+
+.ff-form-success { color: var(--ff-cyan); }
+.ff-form-error { color: #ff6b6b; }
+
+@media (max-width: 640px) {
+    .ff-form-row { grid-template-columns: 1fr; }
+}

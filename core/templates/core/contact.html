@@ -1,5 +1,51 @@
-<!-- core/templates/core/contact.html -->
 {% extends "base.html" %}
+{% load static %}
+{% block title %}Contact - Future Factory{% endblock %}
 {% block content %}
-<section style="padding:6rem 5%;"><h1>Contact / get a quote</h1></section>
+<section class="ff-page-header">
+    <h1>Let's talk about your growth</h1>
+    <p>Tell us what you need — we'll get back to you within 24 hours.</p>
+</section>
+<section class="ff-contact">
+    <form id="ff-lead-form" class="ff-lead-form">
+        <div class="ff-form-row">
+            <div class="ff-form-group">
+                <label for="id_name">Name *</label>
+                <input type="text" id="id_name" name="name" required>
+            </div>
+            <div class="ff-form-group">
+                <label for="id_email">Email *</label>
+                <input type="email" id="id_email" name="email" required>
+            </div>
+        </div>
+        <div class="ff-form-row">
+            <div class="ff-form-group">
+                <label for="id_phone">Phone</label>
+                <input type="tel" id="id_phone" name="phone">
+            </div>
+            <div class="ff-form-group">
+                <label for="id_company">Company</label>
+                <input type="text" id="id_company" name="company">
+            </div>
+        </div>
+        <div class="ff-form-group">
+            <label for="id_service">Service you're interested in</label>
+            <select id="id_service" name="service_interested">
+                <option value="">Select a service</option>
+                {% for service in services %}
+                <option value="{{ service.name }}">{{ service.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="ff-form-group">
+            <label for="id_message">Message *</label>
+            <textarea id="id_message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="ff-btn-primary">Send message</button>
+        <p id="ff-form-status" class="ff-form-status"></p>
+    </form>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'js/contact-form.js' %}"></script>
 {% endblock %}

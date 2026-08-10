@@ -12,4 +12,5 @@ def about(request):
 
 
 def contact(request):
-    return render(request, 'core/contact.html')
+    services = Service.objects.filter(is_active=True)
+    return render(request, 'core/contact.html', {'services': services})
