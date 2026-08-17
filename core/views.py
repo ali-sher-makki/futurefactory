@@ -15,7 +15,12 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'core/about.html')
+    service_count = Service.objects.filter(is_active=True).count()
+    return render(request, 'core/about.html', {'service_count': service_count})
+
+
+def leadership(request):
+    return render(request, 'core/leadership.html')
 
 
 def contact(request):

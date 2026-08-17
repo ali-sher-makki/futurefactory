@@ -543,3 +543,102 @@ body.nav-open {
         font-size: 1.4rem;
     }
 }
+.ff-about-story {
+    padding: 4rem 5% 2rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.ff-about-story-inner { max-width: 720px; }
+.ff-about-story-inner h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+.ff-about-story-inner p { color: var(--ff-text-muted); font-size: 1.05rem; }
+
+.ff-values-section { padding: 4rem 5%; text-align: center; }
+.ff-values-section h2 { font-size: 1.75rem; margin-bottom: 2.5rem; }
+
+.ff-values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.ff-value-card {
+    background: var(--ff-indigo);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+}
+
+.ff-value-icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+.ff-value-card h3 { color: var(--ff-cyan); margin-bottom: 0.5rem; }
+.ff-value-card p { color: var(--ff-text-muted); font-size: 0.9rem; }
+
+.ff-stats-section { padding: 3rem 5% 5rem; }
+
+.ff-stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ff-stat-number {
+    display: block;
+    font-family: var(--ff-font-heading);
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--ff-cyan);
+}
+
+.ff-stat-label { color: var(--ff-text-muted); font-size: 0.9rem; }
+
+.ff-about-cta { text-align: center; padding: 2rem 5% 6rem; }
+.ff-about-cta h2 { font-size: 1.75rem; margin-bottom: 1.5rem; }
+
+.ff-leadership-section { padding: 4rem 5% 6rem; }
+
+.ff-leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.ff-leader-card {
+    background: var(--ff-indigo);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.ff-leader-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ff-cyan), var(--ff-violet));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-family: var(--ff-font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--ff-navy);
+}
+
+.ff-leader-title {
+    display: block;
+    color: var(--ff-cyan);
+    font-size: 0.85rem;
+    margin: 0.25rem 0 0.75rem;
+}
+
+.ff-leader-card p { color: var(--ff-text-muted); font-size: 0.9rem; }

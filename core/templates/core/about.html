@@ -1,5 +1,62 @@
-<!-- core/templates/core/about.html -->
 {% extends "base.html" %}
+{% load static %}
+{% block title %}About - Future Factory{% endblock %}
 {% block content %}
-<section style="padding:6rem 5%;"><h1>About Future Factory</h1></section>
+<section class="ff-page-header">
+    <h1>About Future Factory</h1>
+    <p>We're the growth team behind businesses that don't have time to build one in-house.</p>
+</section>
+
+<section class="ff-about-story">
+    <div class="ff-about-story-inner">
+        <h2>Why we exist</h2>
+        <p>Most businesses know exactly what they need to grow — more leads, more visibility, more automation — but not enough hours in the day to build it themselves. Future Factory exists to close that gap. We plug in as your growth team: generating leads, running outreach, managing your online presence, and automating the busywork, so you can focus on running the business.</p>
+    </div>
+</section>
+
+<section class="ff-values-section">
+    <h2>What drives us</h2>
+    <div class="ff-values-grid">
+        <div class="ff-value-card">
+            <span class="ff-value-icon">⚡</span>
+            <h3>Speed</h3>
+            <p>Campaigns launch in days, not months. We move at the pace your pipeline needs.</p>
+        </div>
+        <div class="ff-value-card">
+            <span class="ff-value-icon">🎯</span>
+            <h3>Precision</h3>
+            <p>Every list, message, and campaign is targeted — no spray-and-pray outreach.</p>
+        </div>
+        <div class="ff-value-card">
+            <span class="ff-value-icon">🤝</span>
+            <h3>Partnership</h3>
+            <p>We report transparently and treat your growth targets as our own.</p>
+        </div>
+    </div>
+</section>
+
+<section class="ff-stats-section">
+    <div class="ff-stats-row">
+        <div class="ff-stat">
+            <span class="ff-stat-number" data-target="{{ service_count }}">0</span>
+            <span class="ff-stat-label">Core services</span>
+        </div>
+        <div class="ff-stat">
+            <span class="ff-stat-number" data-target="24">0</span>
+            <span class="ff-stat-label">Hour response time</span>
+        </div>
+        <div class="ff-stat">
+            <span class="ff-stat-number" data-target="100">0</span>
+            <span class="ff-stat-label">% transparent reporting</span>
+        </div>
+    </div>
+</section>
+
+<section class="ff-about-cta">
+    <h2>Ready to build your growth engine?</h2>
+    <a href="{% url 'core:contact' %}" class="ff-btn-primary">Get a free quote</a>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'js/counters.js' %}"></script>
 {% endblock %}
