@@ -1,23 +1,60 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}Our Services - Future Factory{% endblock %}
+
 {% block content %}
 <section class="ff-page-header">
     <h1>Our Services</h1>
-    <p>Everything you need to generate leads, close deals, and scale operations.</p>
+    <p>Scroll down to interactively explore our core growth solutions.</p>
 </section>
-<section class="ff-services-teaser">
-    <div class="ff-tilt-grid">
-        {% for service in services %}
-        <a href="{{ service.get_absolute_url }}" class="ff-tilt-card">
-            {% if service.icon %}<span class="ff-card-icon">{{ service.icon }}</span>{% endif %}
-            <h3>{{ service.name }}</h3>
-            <p>{{ service.short_description }}</p>
-        </a>
-        {% endfor %}
+
+<section class="ff-cards-scroll-container" id="ff-cards-scroll-container">
+    <div class="ff-cards-stage">
+        <div class="ff-cards-deck" id="ff-cards-deck">
+            {% for service in services %}
+            <div class="ff-service-card-3d" data-index="{{ forloop.counter0 }}">
+                <div class="ff-card-glass">
+                    <div class="ff-card-header">
+                        {% if service.icon %}
+                        <div class="ff-card-icon-badge">{{ service.icon }}</div>
+                        {% endif %}
+                        <span class="ff-card-number">0{{ forloop.counter }}</span>
+                    </div>
+                    <h2>{{ service.name }}</h2>
+                    <p class="ff-card-desc">{{ service.short_description }}</p>
+                    {% if service.feature_list %}
+                    <ul class="ff-card-features">
+                        {% for feature in service.feature_list|slice:":3" %}
+                        <li><span>✓</span> {{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="ff-card-footer">
+                        <a href="{{ service.get_absolute_url }}" class="ff-btn-primary ff-btn-sm">Explore Service &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="ff-cards-controls">
+            <button class="ff-deck-btn prev" id="ff-deck-prev" aria-label="Previous service">&larr;</button>
+            <div class="ff-deck-dots" id="ff-deck-dots">
+                {% for service in services %}
+                <button class="ff-deck-dot {% if forloop.first %}active{% endif %}" data-target="{{ forloop.counter0 }}" aria-label="Go to service {{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
+            <button class="ff-deck-btn next" id="ff-deck-next" aria-label="Next service">&rarr;</button>
+        </div>
+
+        <div class="ff-cards-counter" id="ff-cards-counter">
+            <span id="ff-counter-current">01</span> / <span>{% if services|length < 10 %}0{% endif %}{{ services|length }}</span>
+        </div>
     </div>
 </section>
 {% endblock %}
+
 {% block extra_scripts %}
-<script src="{% static 'js/tilt-cards.js' %}"></script>
+<script src="{% static 'js/service-cards.js' %}?v=2"></script>
 {% endblock %}

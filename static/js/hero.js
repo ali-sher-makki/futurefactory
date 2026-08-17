@@ -62,9 +62,18 @@
     }
     animate();
 
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
+    function onResize() {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        if (width === 0 || height === 0) return;
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-    });
+        renderer.setSize(width, height);
+    }
+
+    window.addEventListener('resize', onResize);
+    if (typeof ResizeObserver !== 'undefined') {
+        const ro = new ResizeObserver(onResize);
+        ro.observe(container);
+    }
 })();
