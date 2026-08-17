@@ -1,3 +1,9 @@
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('ff-lead-form');
     const statusEl = document.getElementById('ff-form-status');
@@ -23,7 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch('/api/leads/submit/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken') || '',
+                },
                 body: JSON.stringify(data),
             });
             const result = await response.json();
@@ -34,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 form.reset();
             } else {
                 const firstError = Object.values(result)[0];
-                statusEl.textContent = Array.isArray(firstError) ? firstError[0] : 'Something went wrong. Please try again.';
+                statusEl.textContent = Array.isArray(firstError) ? firstError[0] : (result.detail || 'Something went wrong. Please try again.');
                 statusEl.classList.add('ff-form-error');
             }
         } catch (err) {

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Notifications - Future Factory{% endblock %}
+{% block content %}
+<section class="ff-page-header">
+    <h1>Admin Notifications</h1>
+    <p>Enable push notifications to get alerted the moment a new lead comes in.</p>
+</section>
+<section class="ff-contact">
+    <div style="text-align:center;">
+        <button id="enable-push-btn" class="ff-btn-primary" data-vapid-key="{{ vapid_public_key }}">Enable notifications</button>
+        <p id="push-status" class="ff-form-status"></p>
+    </div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'js/push-notifications.js' %}"></script>
+{% endblock %}

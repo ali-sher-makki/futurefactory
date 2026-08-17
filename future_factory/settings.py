@@ -101,3 +101,21 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@futurefactory.com')
 ADMIN_EMAIL = config('ADMIN_EMAIL', default='')
+
+VAPID_PUBLIC_KEY = config('VAPID_PUBLIC_KEY', default='')
+VAPID_PRIVATE_KEY_PATH = config('VAPID_PRIVATE_KEY_PATH', default='private_key.pem')
+VAPID_CLAIM_EMAIL = config('VAPID_CLAIM_EMAIL', default='mailto:admin@futurefactory.com')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
