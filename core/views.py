@@ -25,7 +25,8 @@ def leadership(request):
 
 def contact(request):
     services = Service.objects.filter(is_active=True)
-    return render(request, 'core/contact.html', {'services': services})
+    preselected_service = request.GET.get('service', '')
+    return render(request, 'core/contact.html', {'services': services, 'preselected_service': preselected_service})
 
 
 @staff_member_required

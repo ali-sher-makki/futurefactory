@@ -642,3 +642,124 @@ body.nav-open {
 }
 
 .ff-leader-card p { color: var(--ff-text-muted); font-size: 0.9rem; }
+.ff-hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.ff-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.ff-reveal.ff-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.ff-process-section {
+    padding: 6rem 5%;
+    text-align: center;
+}
+
+.ff-process-section h2 {
+    font-size: 2rem;
+    margin-bottom: 3.5rem;
+}
+
+.ff-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ff-process-grid::before {
+    content: '';
+    position: absolute;
+    top: 2.75rem;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+    z-index: 0;
+}
+
+.ff-process-step {
+    position: relative;
+    z-index: 1;
+}
+
+.ff-process-step:nth-child(2) { transition-delay: 0.1s; }
+.ff-process-step:nth-child(3) { transition-delay: 0.2s; }
+.ff-process-step:nth-child(4) { transition-delay: 0.3s; }
+
+.ff-process-number {
+    display: block;
+    font-family: var(--ff-font-heading);
+    font-size: 0.85rem;
+    color: var(--ff-violet);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.ff-process-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--ff-indigo);
+    border: 1px solid rgba(0, 217, 255, 0.25);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.ff-process-step h3 {
+    color: var(--ff-cyan);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.ff-process-step p {
+    color: var(--ff-text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.ff-cta-banner {
+    margin: 2rem 5% 6rem;
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--ff-indigo), var(--ff-navy-light));
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 16px;
+}
+
+.ff-cta-banner h2 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.ff-cta-banner p {
+    color: var(--ff-text-muted);
+    margin-bottom: 1.75rem;
+}
+
+@media (max-width: 900px) {
+    .ff-process-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem 1.5rem;
+    }
+    .ff-process-grid::before { display: none; }
+}
+
+@media (max-width: 480px) {
+    .ff-process-grid { grid-template-columns: 1fr; }
+    .ff-hero-actions { justify-content: center; }
+}

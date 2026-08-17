@@ -33,7 +33,7 @@
             <select id="id_service" name="service_interested">
                 <option value="">Select a service</option>
                 {% for service in services %}
-                <option value="{{ service.name }}">{{ service.name }}</option>
+                <option value="{{ service.name }}" {% if service.name == preselected_service %}selected{% endif %}>{{ service.name }}</option>
                 {% endfor %}
             </select>
         </div>
