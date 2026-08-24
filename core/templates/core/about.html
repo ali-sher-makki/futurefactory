@@ -1,62 +1,427 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}About - Future Factory{% endblock %}
+{% block extra_head %}
+<style>
+/* ── About Hero ─────────────────────────────────────── */
+.ff-about-hero {
+    position: relative;
+    padding: 7rem 5% 5rem;
+    text-align: center;
+    overflow: hidden;
+}
+.ff-about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(124,92,255,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(0,217,255,0.12) 0%, transparent 70%);
+    animation: aboutMeshDrift 12s ease-in-out infinite alternate;
+    z-index: 0;
+}
+@keyframes aboutMeshDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-30px, 20px) scale(1.05); }
+}
+.ff-about-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+}
+.ff-about-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1.25rem;
+    border-radius: 100px;
+    background: rgba(0,217,255,0.08);
+    border: 1px solid rgba(0,217,255,0.2);
+    color: var(--ff-cyan);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 1.75rem;
+    animation: badgePulse 3s ease-in-out infinite;
+}
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,217,255,0.15); }
+    50%      { box-shadow: 0 0 20px 4px rgba(0,217,255,0.1); }
+}
+.ff-about-hero h1 {
+    font-size: 3rem;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, #ffffff 0%, var(--ff-cyan) 50%, var(--ff-violet) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.ff-about-hero p {
+    color: var(--ff-text-muted);
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ── Animated divider ─────────────────────────────── */
+.ff-section-divider {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+.ff-divider-line {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ff-cyan), var(--ff-violet), transparent);
+    border-radius: 2px;
+    animation: dividerShimmer 3s ease-in-out infinite;
+}
+@keyframes dividerShimmer {
+    0%, 100% { opacity: 0.5; width: 120px; }
+    50%      { opacity: 1; width: 180px; }
+}
+
+/* ── Story section (split layout) ─────────────────── */
+.ff-story-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 5%;
+    align-items: center;
+}
+.ff-story-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+}
+.ff-story-orb {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--ff-cyan), var(--ff-violet));
+    opacity: 0.15;
+    filter: blur(60px);
+    animation: orbFloat 6s ease-in-out infinite;
+    position: absolute;
+}
+@keyframes orbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-20px) scale(1.08); }
+}
+.ff-story-icon-ring {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,217,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ringRotate 20s linear infinite;
+}
+@keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+.ff-story-icon-ring::before,
+.ff-story-icon-ring::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ff-cyan);
+    box-shadow: 0 0 12px var(--ff-cyan);
+}
+.ff-story-icon-ring::before { top: -5px; left: 50%; transform: translateX(-50%); }
+.ff-story-icon-ring::after  { bottom: -5px; left: 50%; transform: translateX(-50%); background: var(--ff-violet); box-shadow: 0 0 12px var(--ff-violet); }
+.ff-story-center-icon {
+    font-size: 3.5rem;
+    animation: ringRotateReverse 20s linear infinite;
+}
+@keyframes ringRotateReverse {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+}
+.ff-story-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
+}
+.ff-story-text h2 span {
+    color: var(--ff-cyan);
+}
+.ff-story-text p {
+    color: var(--ff-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* ── Values section (glass cards with hover glow) ── */
+.ff-values-v2 {
+    padding: 5rem 5%;
+    text-align: center;
+}
+.ff-values-v2 h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.ff-values-v2 .ff-section-subtitle {
+    color: var(--ff-text-muted);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+}
+.ff-values-v2-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.ff-value-card-v2 {
+    position: relative;
+    background: linear-gradient(145deg, rgba(27,36,86,0.7), rgba(10,14,39,0.9));
+    border: 1px solid rgba(0,217,255,0.12);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: left;
+    overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.ff-value-card-v2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ff-cyan), var(--ff-violet));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+.ff-value-card-v2:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0,217,255,0.3);
+    box-shadow: 0 20px 50px rgba(0,217,255,0.1), 0 0 30px rgba(124,92,255,0.08);
+}
+.ff-value-card-v2:hover::before {
+    opacity: 1;
+}
+.ff-value-icon-v2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(0,217,255,0.2);
+}
+.ff-value-card-v2:nth-child(1) .ff-value-icon-v2 { background: rgba(0,217,255,0.1); }
+.ff-value-card-v2:nth-child(2) .ff-value-icon-v2 { background: rgba(124,92,255,0.1); }
+.ff-value-card-v2:nth-child(3) .ff-value-icon-v2 { background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.2); }
+.ff-value-card-v2 h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: #fff;
+}
+.ff-value-card-v2 p {
+    color: var(--ff-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* ── Stats bar (glass strip) ──────────────────────── */
+.ff-stats-bar {
+    margin: 2rem 5%;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(27,36,86,0.6), rgba(10,14,39,0.8));
+    border: 1px solid rgba(0,217,255,0.15);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+.ff-stats-bar::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0,217,255,0.08), transparent 70%);
+    top: -60px;
+    left: 10%;
+    border-radius: 50%;
+}
+.ff-stats-bar::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(124,92,255,0.08), transparent 70%);
+    bottom: -60px;
+    right: 10%;
+    border-radius: 50%;
+}
+.ff-stat-v2 {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.ff-stats-bar .ff-stat-v2 .ff-stat-number {
+    display: inline;
+    font-family: var(--ff-font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--ff-cyan);
+    line-height: 1.1;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--ff-cyan);
+    background-clip: unset;
+}
+.ff-stats-bar .ff-stat-v2 .ff-stat-suffix {
+    font-family: var(--ff-font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ff-violet);
+    -webkit-text-fill-color: var(--ff-violet);
+}
+.ff-stat-v2 .ff-stat-label {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--ff-text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ── CTA section ──────────────────────────────────── */
+.ff-about-cta-v2 {
+    text-align: center;
+    padding: 5rem 5% 6rem;
+    position: relative;
+}
+.ff-about-cta-v2 h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+}
+.ff-about-cta-v2 p {
+    color: var(--ff-text-muted);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ff-btn-glow {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--ff-cyan), var(--ff-violet));
+    color: #fff;
+    font-weight: 700;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+}
+.ff-btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0,217,255,0.3), 0 0 20px rgba(124,92,255,0.2);
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 900px) {
+    .ff-story-split { grid-template-columns: 1fr; gap: 2rem; }
+    .ff-story-visual { min-height: 220px; }
+    .ff-values-v2-grid { grid-template-columns: 1fr; max-width: 420px; }
+    .ff-stats-bar { flex-direction: column; gap: 2rem; align-items: center; }
+    .ff-about-hero h1 { font-size: 2.25rem; }
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<section class="ff-page-header">
-    <h1>About Future Factory</h1>
-    <p>We're the growth team behind businesses that don't have time to build one in-house.</p>
-</section>
-
-<section class="ff-about-story">
-    <div class="ff-about-story-inner">
-        <h2>Why we exist</h2>
-        <p>Most businesses know exactly what they need to grow — more leads, more visibility, more automation — but not enough hours in the day to build it themselves. Future Factory exists to close that gap. We plug in as your growth team: generating leads, running outreach, managing your online presence, and automating the busywork, so you can focus on running the business.</p>
+<!-- ── Hero ──────────────────────────────────── -->
+<section class="ff-about-hero">
+    <div class="ff-about-hero-content">
+        <span class="ff-about-hero-badge">✦ Who we are</span>
+        <h1>We build growth engines for ambitious businesses</h1>
+        <p>We're the plug-in growth team behind businesses that know exactly what they need — but not enough hours in the day to build it themselves.</p>
     </div>
 </section>
 
-<section class="ff-values-section">
+<div class="ff-section-divider"><span class="ff-divider-line"></span></div>
+
+<!-- ── Story (split layout) ─────────────────── -->
+<section class="ff-story-split">
+    <div class="ff-story-visual">
+        <div class="ff-story-orb"></div>
+        <div class="ff-story-icon-ring">
+            <span class="ff-story-center-icon">🚀</span>
+        </div>
+    </div>
+    <div class="ff-story-text">
+        <h2>Why <span>Future Factory</span> exists</h2>
+        <p>Most businesses know exactly what they need to grow — more leads, more visibility, more automation — but not enough hours in the day to build it themselves.</p>
+        <p style="margin-top: 1rem;">Future Factory exists to close that gap. We plug in as your growth team: generating leads, running outreach, managing your online presence, and automating the busywork, so you can focus on running the business.</p>
+    </div>
+</section>
+
+<!-- ── Values ────────────────────────────────── -->
+<section class="ff-values-v2">
     <h2>What drives us</h2>
-    <div class="ff-values-grid">
-        <div class="ff-value-card">
-            <span class="ff-value-icon">⚡</span>
+    <p class="ff-section-subtitle">Three principles behind every campaign, automation, and conversation we have.</p>
+    <div class="ff-values-v2-grid">
+        <div class="ff-value-card-v2">
+            <span class="ff-value-icon-v2">⚡</span>
             <h3>Speed</h3>
-            <p>Campaigns launch in days, not months. We move at the pace your pipeline needs.</p>
+            <p>Campaigns launch in days, not months. We move at the pace your pipeline needs — because speed is a competitive advantage.</p>
         </div>
-        <div class="ff-value-card">
-            <span class="ff-value-icon">🎯</span>
+        <div class="ff-value-card-v2">
+            <span class="ff-value-icon-v2">🎯</span>
             <h3>Precision</h3>
-            <p>Every list, message, and campaign is targeted — no spray-and-pray outreach.</p>
+            <p>Every list, message, and campaign is targeted. No spray-and-pray outreach — just data-driven precision that converts.</p>
         </div>
-        <div class="ff-value-card">
-            <span class="ff-value-icon">🤝</span>
+        <div class="ff-value-card-v2">
+            <span class="ff-value-icon-v2">🤝</span>
             <h3>Partnership</h3>
-            <p>We report transparently and treat your growth targets as our own.</p>
+            <p>We report transparently and treat your growth targets as our own. Your wins are our wins.</p>
         </div>
     </div>
 </section>
 
-<section class="ff-stats-section">
-    <div class="ff-stats-row">
-        <div class="ff-stat">
-            <span class="ff-stat-number" data-target="{{ service_count }}">0</span>
-            <span class="ff-stat-label">Core services</span>
-        </div>
-        <div class="ff-stat">
-            <span class="ff-stat-number" data-target="24">0</span>
-            <span class="ff-stat-label">Hour response time</span>
-        </div>
-        <div class="ff-stat">
-            <span class="ff-stat-number" data-target="100">0</span>
-            <span class="ff-stat-label">% transparent reporting</span>
-        </div>
+<!-- ── Stats ──────────────────────────────────── -->
+<section class="ff-stats-bar">
+    <div class="ff-stat-v2">
+        <span class="ff-stat-number" data-target="{{ service_count }}">0</span>
+        <span class="ff-stat-label">Core services</span>
+    </div>
+    <div class="ff-stat-v2">
+        <span><span class="ff-stat-number" data-target="24">0</span><span class="ff-stat-suffix">h</span></span>
+        <span class="ff-stat-label">Response time</span>
+    </div>
+    <div class="ff-stat-v2">
+        <span><span class="ff-stat-number" data-target="100">0</span><span class="ff-stat-suffix">%</span></span>
+        <span class="ff-stat-label">Transparent reporting</span>
     </div>
 </section>
 
-<section class="ff-about-cta">
+<!-- ── CTA ────────────────────────────────────── -->
+<section class="ff-about-cta-v2">
     <h2>Ready to build your growth engine?</h2>
-    <a href="{% url 'core:contact' %}" class="ff-btn-primary">Get a free quote</a>
+    <p>Let's talk about what Future Factory can do for your business — no commitment, no fluff.</p>
+    <a href="{% url 'core:contact' %}" class="ff-btn-glow">Get a free quote →</a>
 </section>
 {% endblock %}
+
 {% block extra_scripts %}
 <script src="{% static 'js/counters.js' %}"></script>
 {% endblock %}

@@ -1,23 +1,447 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}{{ service.name }} - Future Factory{% endblock %}
+{% block extra_head %}
+<style>
+/* ── Service Detail Hero ────────────────────────── */
+.ff-sd-hero {
+    position: relative;
+    padding: 6rem 5% 4rem;
+    overflow: hidden;
+}
+.ff-sd-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 50% 50% at 70% 20%, rgba(124,92,255,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,217,255,0.1) 0%, transparent 70%);
+    z-index: 0;
+}
+.ff-sd-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+.ff-sd-hero-text { }
+.ff-sd-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ff-text-muted);
+    margin-bottom: 1.5rem;
+}
+.ff-sd-breadcrumb a {
+    color: var(--ff-cyan);
+    transition: opacity 0.2s;
+}
+.ff-sd-breadcrumb a:hover { opacity: 0.8; }
+.ff-sd-breadcrumb span { opacity: 0.5; }
+.ff-sd-hero-text h1 {
+    font-size: 2.75rem;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+.ff-sd-lead {
+    color: var(--ff-text-muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+.ff-sd-meta-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.ff-sd-meta-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    background: rgba(0,217,255,0.08);
+    border: 1px solid rgba(0,217,255,0.15);
+    color: var(--ff-cyan);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* ── Floating icon visual ───────────────────────── */
+.ff-sd-hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.ff-sd-icon-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ff-sd-icon-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,217,255,0.12), transparent 70%);
+    animation: sdGlowPulse 4s ease-in-out infinite;
+}
+@keyframes sdGlowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50%      { transform: scale(1.15); opacity: 1; }
+}
+.ff-sd-icon-ring {
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(0,217,255,0.2);
+    animation: sdRingSpin 30s linear infinite;
+}
+@keyframes sdRingSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+.ff-sd-icon-ring::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ff-violet);
+    box-shadow: 0 0 10px var(--ff-violet);
+}
+.ff-sd-main-icon {
+    font-size: 5rem;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 30px rgba(0,217,255,0.3));
+    animation: sdIconFloat 5s ease-in-out infinite;
+}
+@keyframes sdIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+.ff-sd-orbit-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ff-cyan);
+    box-shadow: 0 0 8px var(--ff-cyan);
+}
+.ff-sd-orbit-dot:nth-child(4) { top: 10%; right: 15%; animation: sdDotBlink 2s ease-in-out infinite; }
+.ff-sd-orbit-dot:nth-child(5) { bottom: 20%; left: 10%; animation: sdDotBlink 2.5s ease-in-out infinite 0.5s; }
+.ff-sd-orbit-dot:nth-child(6) { top: 50%; right: 5%; animation: sdDotBlink 3s ease-in-out infinite 1s; background: var(--ff-violet); box-shadow: 0 0 8px var(--ff-violet); }
+@keyframes sdDotBlink {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50%      { opacity: 1; transform: scale(1.3); }
+}
+
+/* ── Description section ────────────────────────── */
+.ff-sd-body-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 5% 4rem;
+}
+.ff-sd-body-card {
+    background: linear-gradient(145deg, rgba(27,36,86,0.5), rgba(10,14,39,0.7));
+    border: 1px solid rgba(0,217,255,0.1);
+    border-radius: 20px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+.ff-sd-body-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--ff-cyan), var(--ff-violet), transparent);
+}
+.ff-sd-body-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+    color: #fff;
+}
+.ff-sd-body-text {
+    color: var(--ff-text-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+/* ── Features grid ──────────────────────────────── */
+.ff-sd-features-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 5% 4rem;
+}
+.ff-sd-features-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.ff-sd-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+.ff-sd-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(27,36,86,0.4);
+    border: 1px solid rgba(0,217,255,0.08);
+    border-radius: 12px;
+    transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+.ff-sd-feature-item:hover {
+    border-color: rgba(0,217,255,0.25);
+    transform: translateX(4px);
+    background: rgba(27,36,86,0.65);
+}
+.ff-sd-feature-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(0,217,255,0.15), rgba(124,92,255,0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ff-cyan);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+.ff-sd-feature-text {
+    color: var(--ff-text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* ── CTA banner ─────────────────────────────────── */
+.ff-sd-cta {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 5% 3rem;
+}
+.ff-sd-cta-card {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: linear-gradient(135deg, var(--ff-indigo), var(--ff-navy-light));
+    border: 1px solid rgba(0,217,255,0.18);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.ff-sd-cta-card::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0,217,255,0.08), transparent 70%);
+    top: -50px;
+    right: -50px;
+    border-radius: 50%;
+}
+.ff-sd-cta-card h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+.ff-sd-cta-card p {
+    color: var(--ff-text-muted);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+.ff-btn-glow {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--ff-cyan), var(--ff-violet));
+    color: #fff;
+    font-weight: 700;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    z-index: 1;
+}
+.ff-btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0,217,255,0.3), 0 0 20px rgba(124,92,255,0.2);
+}
+
+/* ── Related services ───────────────────────────── */
+.ff-sd-related {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 5% 6rem;
+}
+.ff-sd-related h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.ff-sd-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+.ff-sd-related-card {
+    display: block;
+    background: linear-gradient(145deg, rgba(27,36,86,0.6), rgba(10,14,39,0.8));
+    border: 1px solid rgba(0,217,255,0.1);
+    border-radius: 14px;
+    padding: 1.75rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.ff-sd-related-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0,217,255,0.3);
+    box-shadow: 0 16px 40px rgba(0,217,255,0.1);
+}
+.ff-sd-related-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+.ff-sd-related-card h3 {
+    font-size: 1.1rem;
+    color: var(--ff-cyan);
+    margin-bottom: 0.4rem;
+}
+.ff-sd-related-card p {
+    color: var(--ff-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+.ff-sd-related-arrow {
+    display: inline-block;
+    margin-top: 0.75rem;
+    color: var(--ff-cyan);
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+.ff-sd-related-card:hover .ff-sd-related-arrow {
+    transform: translateX(4px);
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 900px) {
+    .ff-sd-hero-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+    .ff-sd-hero-text h1 { font-size: 2.2rem; }
+    .ff-sd-meta-row { justify-content: center; }
+    .ff-sd-breadcrumb { justify-content: center; }
+    .ff-sd-icon-container { width: 200px; height: 200px; }
+    .ff-sd-main-icon { font-size: 3.5rem; }
+    .ff-sd-features-grid { grid-template-columns: 1fr; }
+    .ff-sd-related-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+}
+@media (max-width: 640px) {
+    .ff-sd-hero-text h1 { font-size: 1.85rem; }
+    .ff-sd-body-card { padding: 2rem 1.5rem; }
+}
+</style>
+{% endblock %}
+
 {% block content %}
-<section class="ff-service-detail">
-    <div class="ff-service-detail-inner">
-        {% if service.icon %}<span class="ff-card-icon-lg">{{ service.icon }}</span>{% endif %}
-        <h1>{{ service.name }}</h1>
-        <p class="ff-service-lead">{{ service.short_description }}</p>
-        <div class="ff-service-body">
-            <p>{{ service.detail_description|linebreaksbr }}</p>
+<!-- ── Hero ──────────────────────────────────── -->
+<section class="ff-sd-hero">
+    <div class="ff-sd-hero-inner">
+        <div class="ff-sd-hero-text">
+            <div class="ff-sd-breadcrumb">
+                <a href="{% url 'services:list' %}">Services</a>
+                <span>›</span>
+                <span>{{ service.name }}</span>
+            </div>
+            <h1>{{ service.name }}</h1>
+            <p class="ff-sd-lead">{{ service.short_description }}</p>
+            <div class="ff-sd-meta-row">
+                <span class="ff-sd-meta-chip">✦ Active Service</span>
+                {% if service.feature_list %}
+                <span class="ff-sd-meta-chip">{{ service.feature_list|length }} Key Features</span>
+                {% endif %}
+            </div>
         </div>
-        {% if service.feature_list %}
-        <ul class="ff-service-features">
-            {% for feature in service.feature_list %}
-            <li>{{ feature }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <a href="{% url 'core:contact' %}?service={{ service.name|urlencode }}" class="ff-btn-primary">Get a free quote</a>
+        <div class="ff-sd-hero-visual">
+            <div class="ff-sd-icon-container">
+                <div class="ff-sd-icon-glow"></div>
+                <div class="ff-sd-icon-ring"></div>
+                {% if service.icon %}<span class="ff-sd-main-icon">{{ service.icon }}</span>{% endif %}
+                <span class="ff-sd-orbit-dot"></span>
+                <span class="ff-sd-orbit-dot"></span>
+                <span class="ff-sd-orbit-dot"></span>
+            </div>
+        </div>
     </div>
 </section>
+
+<!-- ── Body ──────────────────────────────────── -->
+<section class="ff-sd-body-section">
+    <div class="ff-sd-body-card">
+        <h2>About this service</h2>
+        <div class="ff-sd-body-text">
+            {{ service.detail_description|linebreaksbr }}
+        </div>
+    </div>
+</section>
+
+<!-- ── Features ──────────────────────────────── -->
+{% if service.feature_list %}
+<section class="ff-sd-features-section">
+    <h2>What's included</h2>
+    <div class="ff-sd-features-grid">
+        {% for feature in service.feature_list %}
+        <div class="ff-sd-feature-item">
+            <div class="ff-sd-feature-icon">{{ forloop.counter }}</div>
+            <span class="ff-sd-feature-text">{{ feature }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- ── CTA ────────────────────────────────────── -->
+<section class="ff-sd-cta">
+    <div class="ff-sd-cta-card">
+        <h2>Interested in {{ service.name }}?</h2>
+        <p>Tell us about your project and we'll craft a custom proposal — zero commitment.</p>
+        <a href="{% url 'core:contact' %}?service={{ service.name|urlencode }}" class="ff-btn-glow">Get a free quote →</a>
+    </div>
+</section>
+
+<!-- ── Related Services ──────────────────────── -->
+{% if other_services %}
+<section class="ff-sd-related">
+    <h2>Explore more services</h2>
+    <div class="ff-sd-related-grid">
+        {% for svc in other_services %}
+        <a href="{{ svc.get_absolute_url }}" class="ff-sd-related-card">
+            {% if svc.icon %}<span class="ff-sd-related-icon">{{ svc.icon }}</span>{% endif %}
+            <h3>{{ svc.name }}</h3>
+            <p>{{ svc.short_description }}</p>
+            <span class="ff-sd-related-arrow">Learn more →</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 {% endblock %}

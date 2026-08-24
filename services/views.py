@@ -9,4 +9,8 @@ def service_list(request):
 
 def service_detail(request, slug):
     service = get_object_or_404(Service, slug=slug, is_active=True)
-    return render(request, 'services/service_detail.html', {'service': service})
+    other_services = Service.objects.filter(is_active=True).exclude(pk=service.pk)[:3]
+    return render(request, 'services/service_detail.html', {
+        'service': service,
+        'other_services': other_services,
+    })
